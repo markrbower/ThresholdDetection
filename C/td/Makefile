@@ -1,13 +1,34 @@
 #Makefile for Ncs2Mef project
+ALL = main.c
+
+SRCDIR = src/
+BINDIR = bin/
+EXT = cpp
+
+CXX = gcc
+#CXXFLAGS = -m64 -Wunused-variable -Wuninitialized
+CXXFLAGS = -m64 -g
+
+# Files
+SRCS = $(wildcard $(SRCDIR)*.$(EXT))
+OBJS = $(patsubst $(SRCDIR)%.$(EXT), $(BINDIR)%.o, $(SRCS))
+DEPS = $(OBJS:.o=.d)
+XOBJS = $(filter-out $(patsubst %, $(BINDIR)%.o, $(ALL)), $(OBJS))
+
+# Executable files
+all: $(ALL)
+
+$(ALL): %: $(BINDIR)%.o $(XOBJS)
+	$(CXX) $(CXXFLAGS) -o $@ $^
 
 
 
 
 
 
-CC = gcc
-#CFLAGS = -m64 -Wunused-variable -Wuninitialized
-CFLAGS = -m64 -g
+
+
+
 OPTFLAGS = -O3 
 MAIN = main.c
 MEFLIB_DIR = .
