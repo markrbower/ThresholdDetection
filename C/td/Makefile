@@ -44,9 +44,7 @@ clean:
 dist-clean: clean
 	rm -rf $(ALL)
 
-mef2: 
-	$(CC) -o Ncs2Mef2 $(CFLAGS) -DOUTPUT_TO_MEF2 main.c convert_ncs.c write_mef_channel_mef2.c mef_lib.c
-
-
+mef2:
+	$(CC) -o Ncs2Mef2 $(CFLAGS) -I $(INCLUDE) -DOUTPUT_TO_MEF2 $(SRCS)
 
 
