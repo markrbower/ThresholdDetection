@@ -44,7 +44,10 @@ clean:
 dist-clean: clean
 	rm -rf $(ALL)
 
-mef2:
+mef2: src/main.c
 	$(CC) -o Ncs2Mef2 $(CFLAGS) -I $(INCLUDE) -DOUTPUT_TO_MEF2 $(SRCS)
+
+read:
+	$(CC) -o ReadMef2 $(CFLAGS) -I $(INCLUDE) -DOUTPUT_TO_MEF2 $(SRCS)
 
 
