@@ -12,6 +12,7 @@ CXXFLAGS = -m64 -g
 
 # Files
 SRCFILES = convert_ncs.c write_mef_channel.c $(MEFLIB_DIR)/meflib.c $(MEFLIB_DIR)/mefrec.c
+#SRCS = $(filter-out main.c, $(wildcard $(SRCDIR)*.$(EXT)))
 SRCS = $(wildcard $(SRCDIR)*.$(EXT))
 OBJS = $(patsubst $(SRCDIR)%.$(EXT), $(BINDIR)%.o, $(SRCS))
 DEPS = $(OBJS:.o=.d)
@@ -44,10 +45,10 @@ clean:
 dist-clean: clean
 	rm -rf $(ALL)
 
-mef2: src/main.c
+mef2: $(SRCS)
 	$(CC) -o Ncs2Mef2 $(CFLAGS) -I $(INCLUDE) -DOUTPUT_TO_MEF2 $(SRCS)
 
-read:
+read: $(SRCS)
 	$(CC) -o ReadMef2 $(CFLAGS) -I $(INCLUDE) -DOUTPUT_TO_MEF2 $(SRCS)
 
 
